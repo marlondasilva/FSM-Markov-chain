@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<PcML Title="Markov Chain" Date="2026-06-23 10:30:01" Version="1.1">
+    <Info>
+        <Author>
+            <Name>Random Script</Name>
+            <Email>randomscript@mail.com</Email>
+        </Author>
+        <Description>Markov Chain</Description>
+    </Info>
+    <States>
+        <Root Name="main" Type="XOR" Default="1">
+            <State Name="1" Type="BASIC"/>
+            <State Name="3" Type="BASIC"/>
+            <State Name="2" Type="BASIC"/>
+        </Root>
+    </States>
+    <Events>
+        <Stochastic Name="a_(state: 1)" Value="0.97"/>
+        <Stochastic Name="b_(state: 1)" Value="0.03"/>
+        <Stochastic Name="a_(state: 3)" Value="0.70"/>
+        <Stochastic Name="b_(state: 3)" Value="0.30"/>
+        <Stochastic Name="a_(state: 2)" Value="0.78"/>
+        <Stochastic Name="b_(state: 2)" Value="0.22"/>
+    </Events>
+    <Outputs>
+        <Output Name="1" Value="1"/>
+        <Output Name="0" Value="0"/>
+        <Output Name="2" Value="2"/>
+    </Outputs>
+    <Actions>
+        <OutputTriggerAction Name="action(state: 1 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 1 output: 0)" Output="0"/>
+        <OutputTriggerAction Name="action(state: 3 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 3 output: 2)" Output="2"/>
+        <OutputTriggerAction Name="action(state: 2 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 2 output: 1)" Output="1"/>
+    </Actions>
+    <Transitions>
+        <Transition Source="1" Event="a_(state: 1)" Action="action(state: 1 output: 1)" Destination="3"/>
+        <Transition Source="1" Event="b_(state: 1)" Action="action(state: 1 output: 0)" Destination="1"/>
+        <Transition Source="3" Event="a_(state: 3)" Action="action(state: 3 output: 1)" Destination="2"/>
+        <Transition Source="3" Event="b_(state: 3)" Action="action(state: 3 output: 2)" Destination="3"/>
+        <Transition Source="2" Event="a_(state: 2)" Action="action(state: 2 output: 1)" Destination="1"/>
+        <Transition Source="2" Event="b_(state: 2)" Action="action(state: 2 output: 1)" Destination="2"/>
+    </Transitions>
+</PcML>

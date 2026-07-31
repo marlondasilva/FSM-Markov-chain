@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<PcML Title="Markov Chain" Date="2026-06-23 10:39:03" Version="1.1">
+    <Info>
+        <Author>
+            <Name>Random Script</Name>
+            <Email>randomscript@mail.com</Email>
+        </Author>
+        <Description>Markov Chain</Description>
+    </Info>
+    <States>
+        <Root Name="main" Type="XOR" Default="0">
+            <State Name="0" Type="BASIC"/>
+            <State Name="5" Type="BASIC"/>
+            <State Name="1" Type="BASIC"/>
+            <State Name="2" Type="BASIC"/>
+            <State Name="4" Type="BASIC"/>
+            <State Name="3" Type="BASIC"/>
+        </Root>
+    </States>
+    <Events>
+        <Stochastic Name="0_(state: 0)" Value="0.23"/>
+        <Stochastic Name="1_(state: 0)" Value="0.30"/>
+        <Stochastic Name="2_(state: 0)" Value="0.15"/>
+        <Stochastic Name="3_(state: 0)" Value="0.32"/>
+        <Stochastic Name="0_(state: 5)" Value="0.08"/>
+        <Stochastic Name="1_(state: 5)" Value="0.13"/>
+        <Stochastic Name="2_(state: 5)" Value="0.42"/>
+        <Stochastic Name="3_(state: 5)" Value="0.37"/>
+        <Stochastic Name="0_(state: 1)" Value="0.34"/>
+        <Stochastic Name="1_(state: 1)" Value="0.45"/>
+        <Stochastic Name="2_(state: 1)" Value="0.17"/>
+        <Stochastic Name="3_(state: 1)" Value="0.04"/>
+        <Stochastic Name="0_(state: 2)" Value="0.34"/>
+        <Stochastic Name="1_(state: 2)" Value="0.42"/>
+        <Stochastic Name="2_(state: 2)" Value="0.09"/>
+        <Stochastic Name="3_(state: 2)" Value="0.15"/>
+        <Stochastic Name="0_(state: 4)" Value="0.41"/>
+        <Stochastic Name="1_(state: 4)" Value="0.26"/>
+        <Stochastic Name="2_(state: 4)" Value="0.11"/>
+        <Stochastic Name="3_(state: 4)" Value="0.22"/>
+        <Stochastic Name="0_(state: 3)" Value="0.47"/>
+        <Stochastic Name="1_(state: 3)" Value="0.03"/>
+        <Stochastic Name="2_(state: 3)" Value="0.01"/>
+        <Stochastic Name="3_(state: 3)" Value="0.49"/>
+    </Events>
+    <Outputs>
+        <Output Name="1" Value="1"/>
+        <Output Name="2" Value="2"/>
+        <Output Name="0" Value="0"/>
+        <Output Name="3" Value="3"/>
+    </Outputs>
+    <Actions>
+        <OutputTriggerAction Name="action(state: 0 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 0 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 0 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 0 output: 2)" Output="2"/>
+        <OutputTriggerAction Name="action(state: 5 output: 0)" Output="0"/>
+        <OutputTriggerAction Name="action(state: 5 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 5 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 5 output: 0)" Output="0"/>
+        <OutputTriggerAction Name="action(state: 1 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 1 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 1 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 1 output: 2)" Output="2"/>
+        <OutputTriggerAction Name="action(state: 2 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 2 output: 0)" Output="0"/>
+        <OutputTriggerAction Name="action(state: 2 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 2 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 4 output: 1)" Output="1"/>
+        <OutputTriggerAction Name="action(state: 4 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 4 output: 2)" Output="2"/>
+        <OutputTriggerAction Name="action(state: 4 output: 2)" Output="2"/>
+        <OutputTriggerAction Name="action(state: 3 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 3 output: 2)" Output="2"/>
+        <OutputTriggerAction Name="action(state: 3 output: 3)" Output="3"/>
+        <OutputTriggerAction Name="action(state: 3 output: 1)" Output="1"/>
+    </Actions>
+    <Transitions>
+        <Transition Source="0" Event="0_(state: 0)" Action="action(state: 0 output: 1)" Destination="5"/>
+        <Transition Source="0" Event="1_(state: 0)" Action="action(state: 0 output: 1)" Destination="1"/>
+        <Transition Source="0" Event="2_(state: 0)" Action="action(state: 0 output: 1)" Destination="2"/>
+        <Transition Source="0" Event="3_(state: 0)" Action="action(state: 0 output: 2)" Destination="2"/>
+        <Transition Source="5" Event="0_(state: 5)" Action="action(state: 5 output: 0)" Destination="1"/>
+        <Transition Source="5" Event="1_(state: 5)" Action="action(state: 5 output: 3)" Destination="1"/>
+        <Transition Source="5" Event="2_(state: 5)" Action="action(state: 5 output: 3)" Destination="2"/>
+        <Transition Source="5" Event="3_(state: 5)" Action="action(state: 5 output: 0)" Destination="1"/>
+        <Transition Source="1" Event="0_(state: 1)" Action="action(state: 1 output: 3)" Destination="1"/>
+        <Transition Source="1" Event="1_(state: 1)" Action="action(state: 1 output: 1)" Destination="4"/>
+        <Transition Source="1" Event="2_(state: 1)" Action="action(state: 1 output: 1)" Destination="0"/>
+        <Transition Source="1" Event="3_(state: 1)" Action="action(state: 1 output: 2)" Destination="2"/>
+        <Transition Source="2" Event="0_(state: 2)" Action="action(state: 2 output: 3)" Destination="4"/>
+        <Transition Source="2" Event="1_(state: 2)" Action="action(state: 2 output: 0)" Destination="4"/>
+        <Transition Source="2" Event="2_(state: 2)" Action="action(state: 2 output: 3)" Destination="3"/>
+        <Transition Source="2" Event="3_(state: 2)" Action="action(state: 2 output: 3)" Destination="1"/>
+        <Transition Source="4" Event="0_(state: 4)" Action="action(state: 4 output: 1)" Destination="1"/>
+        <Transition Source="4" Event="1_(state: 4)" Action="action(state: 4 output: 3)" Destination="5"/>
+        <Transition Source="4" Event="2_(state: 4)" Action="action(state: 4 output: 2)" Destination="2"/>
+        <Transition Source="4" Event="3_(state: 4)" Action="action(state: 4 output: 2)" Destination="2"/>
+        <Transition Source="3" Event="0_(state: 3)" Action="action(state: 3 output: 3)" Destination="4"/>
+        <Transition Source="3" Event="1_(state: 3)" Action="action(state: 3 output: 2)" Destination="2"/>
+        <Transition Source="3" Event="2_(state: 3)" Action="action(state: 3 output: 3)" Destination="0"/>
+        <Transition Source="3" Event="3_(state: 3)" Action="action(state: 3 output: 1)" Destination="2"/>
+    </Transitions>
+</PcML>

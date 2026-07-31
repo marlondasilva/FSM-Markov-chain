@@ -3,7 +3,6 @@ import random as rm
 import yaml
 import progressbar
 
-
 import argparse
 PARSER = argparse.ArgumentParser(description="Prioritization of test cases - Markov Chain")
 PARSER.add_argument("train_configs",
@@ -28,11 +27,29 @@ def prob_limit(matrix):
     while(True):
         C = np.dot(matrix,matrixAux)
         D = matrixAux[0][0] - C[0][0]
-        if (abs(D)<epsilon):
+        if (abs(D) < epsilon):
             break
         matrixAux = C
         i = i+1
     return C
+
+def probLimit(P):
+    n = P.shape[0] # number of states
+    A = (P - np.eye(n)).T # transposed matrix from pi.(P - I) to A.b
+
+    # swap the last line to sum(pi) = 1
+    A[-1, :] = 1
+    b = np.zeros(n)
+    b[-1] = 1
+
+    try:
+        pi = np.linalg.solve(A, b)
+        # ~ print("Steady-state Probability (pi):")
+        # ~ print(pi)
+        return pi
+    except np.linalg.LinAlgError:
+        print("Error: The chain has not unique solution. Check if the chain is irreductible.")
+        return 1
 
 def randon_walk(initial_state, matrix, arcs_name, states_list):
     arc_now = initial_state
@@ -111,9 +128,8 @@ if __name__ == "__main__":
     last_probability = 0.0
 
     i = 0
-
-    # Main loop
-    while stop<stop_criteria:
+    # Main loop - here random_walk is used
+    while stop < stop_criteria:
         sequence_arc,sequence_state = randon_walk(initial_state, transition_matrix, arcs_name, states)
         if sequence_arc in list_transitions:
             pass
@@ -144,3 +160,6 @@ if __name__ == "__main__":
     for line in list_states:
         out_states.write(str(line)+"\n")
     out_states.close()
+    
+    # ~ print(probLimit(transition_matrix))
+    # ~ print(prob_limit(transition_matrix))
